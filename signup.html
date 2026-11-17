@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaserX Arena - Operative Registration | Sign Up</title>
+    <link rel="icon" type="image/jpeg" href="image/laser-tag (1).jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        heading: ['"Inter"', 'sans-serif'],
+                    },
+                    fontWeight: {
+                        light: '300',
+                        regular: '400',
+                        medium: '500',
+                        semibold: '600',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #090D16;
+            --bg-secondary: #111827;
+            --bg-card: #1F2937;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+            --accent-color: #EC4899;
+            --accent-dark: #DB2777;
+            --border-color: #374151;
+        }
+
+        body.light-mode {
+            --bg-color: #F8FAFC;
+            --bg-secondary: #F1F5F9;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --accent-color: #DB2777;
+            --accent-dark: #BE185D;
+            --border-color: #E2E8F0;
+        }
+
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 440px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 14px 18px;
+            color: var(--text-main);
+            font-size: 14px;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
+        }
+
+        .theme-toggle-pill {
+            width: 68px;
+            height: 40px;
+            background: var(--bg-secondary);
+            border-radius: 9999px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-pill i {
+            font-size: 12px;
+            z-index: 1;
+        }
+
+        .theme-toggle-pill .fa-sun { color: #9CA3AF; }
+        .theme-toggle-pill .fa-moon { color: #EC4899; }
+
+        .theme-toggle-pill .thumb {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 32px;
+            height: 32px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: 2;
+            border: 1px solid var(--border-color);
+        }
+
+        body.light-mode .theme-toggle-pill .thumb {
+            transform: translateX(28px);
+            background: #0F172A;
+        }
+
+        .rtl-btn-style {
+            min-width: 54px;
+            height: 40px;
+            padding: 0 16px;
+            background: var(--bg-secondary);
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            font-weight: 500;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            height: 42px;
+        }
+
+        .btn-solid {
+            background: var(--accent-color);
+            color: #FFFFFF !important;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-solid:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.7);
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent-color);
+            background: var(--bg-card);
+        }
+
+        /* Fixed Apple icon visibility across light/dark mode */
+        .social-btn .fab.fa-apple {
+            color: var(--text-main) !important;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Top Utility Controls -->
+<div class="absolute top-6 right-6 flex items-center gap-4">
+    <div id="theme-toggle" class="theme-toggle-pill" title="Toggle Light/Dark Mode">
+        <i class="fas fa-sun"></i><i class="fas fa-moon"></i>
+        <div class="thumb"></div>
+    </div>
+    <button id="rtl-btn" class="rtl-btn-style" title="Toggle LTR/RTL">LTR</button>
+</div>
+
+<!-- Signup Card -->
+<div class="login-card">
+    <div class="text-center mb-8">
+        <a href="index.html" class="text-3xl font-medium brand-logo tracking-wide block mb-2"
+            style="color: var(--text-main) !important; text-decoration: none;">
+            <i class="fas fa-crosshairs"
+                style="color: var(--accent-color); margin-right: 0.3em; font-size: 0.9em; vertical-align: middle;"></i>LASER<span style="color: var(--accent-color);">X</span>
+        </a>
+        <p class="text-xs text-[var(--text-muted)] uppercase tracking-widest">Operative Recruitment Registration</p>
+    </div>
+
+    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Operative profile created successfully! Redirecting...'); window.location.href='user.html';">
+        <div>
+            <label class="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2">Operative Callsign</label>
+            <input type="text" placeholder="e.g. Viper_99" class="form-input" required>
+        </div>
+        <div>
+            <label class="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2">Operative Email</label>
+            <input type="email" placeholder="operator@laserxarena.com" class="form-input" required>
+        </div>
+        <div>
+            <label class="block text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2">Access Key / Password</label>
+            <input type="password" placeholder="••••••••••••" class="form-input" required>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+            <input type="checkbox" required class="rounded accent-[var(--accent-color)]">
+            <span>I agree to the <a href="#" class="text-[var(--accent-color)] hover:underline">Arena Safety Rules & Terms</a>.</span>
+        </div>
+        <button type="submit" class="btn btn-solid w-full">Initialize Profile</button>
+    </form>
+
+    <!-- Social Sign Up Buttons placed right under "Initialize Profile" -->
+    <div class="mt-6 pt-6 border-t border-[var(--border-color)]">
+        <p class="text-center text-xs text-[var(--text-muted)] uppercase tracking-wider mb-4">Or initialize with</p>
+        <div class="grid grid-cols-2 gap-3">
+            <button type="button" class="social-btn" onclick="alert('Google Registration initiated')">
+                <i class="fab fa-google text-red-500"></i> Google
+            </button>
+            <button type="button" class="social-btn" onclick="alert('Apple Registration initiated')">
+                <i class="fab fa-apple"></i> Apple
+            </button>
+        </div>
+    </div>
+
+    <div class="mt-6 pt-6 border-t border-[var(--border-color)] text-center text-xs text-[var(--text-muted)]">
+        <p>Already an operative? <a href="signin.html" class="text-[var(--accent-color)] font-medium hover:underline">Access Terminal (Login)</a></p>
+    </div>
+</div>
+
+<!-- Interactivity Script -->
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const theme = localStorage.getItem('theme') || 'dark';
+
+    function updateThemeUI(isLight) {
+        if (isLight) {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+    }
+    updateThemeUI(theme === 'light');
+
+    themeToggle.onclick = () => {
+        const isLight = !document.body.classList.contains('light-mode');
+        updateThemeUI(isLight);
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    };
+
+    const rtlBtn = document.getElementById('rtl-btn');
+    const dir = localStorage.getItem('dir') || 'ltr';
+
+    function updateRTLUI(currentDir) {
+        const isRTL = currentDir === 'rtl';
+        if (rtlBtn) rtlBtn.innerText = isRTL ? 'RTL' : 'LTR';
+    }
+    if (dir === 'rtl') { document.documentElement.dir = 'rtl'; }
+    updateRTLUI(dir);
+
+    rtlBtn.onclick = () => {
+        const isRTL = document.documentElement.dir === 'rtl';
+        const newDir = isRTL ? 'ltr' : 'rtl';
+        document.documentElement.dir = newDir;
+        localStorage.setItem('dir', newDir);
+        updateRTLUI(newDir);
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Admin Dashboard - LaserX Arena</title>
+  <link rel="icon" type="image/jpeg" href="image/laser-tag (1).jpg">
+  
+  <!-- Fonts & Icons matching main site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#EC4899', /* Neon Pink / Laser Accent */
+            secondary: '#DB2777',
+            accent: '#F472B6',
+            darkBg: '#090D16',
+            darkCard: '#1F2937'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+        --text-main: #0F172A;
+        --bg-main: #F8FAFC;
+        --brand-primary: #EC4899;
+        --brand-hover: #DB2777;
+        --border-color: #E2E8F0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif; 
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, h4, h5, h6, .stat-value {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      --text-main: #F9FAFB;
+      --bg-main: #090D16;
+      --border-color: #374151;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    body.dark-mode .stat-card,
+    body.dark-mode .chart-card,
+    body.dark-mode .data-table,
+    body.dark-mode .settings-form,
+    body.dark-mode .product-card {
+      background: #1F2937;
+      border-color: #374151;
+    }
+
+    body.dark-mode .stat-value,
+    body.dark-mode .card-header h3,
+    body.dark-mode .page-title h1,
+    body.dark-mode .product-title,
+    body.dark-mode .form-group label {
+      color: #F9FAFB;
+    }
+
+    body.dark-mode .stat-label,
+    body.dark-mode .page-title p,
+    body.dark-mode .product-stock,
+    body.dark-mode .activity-time {
+      color: #9CA3AF;
+    }
+
+    body.dark-mode .stat-icon {
+      background: rgba(236, 72, 153, 0.15);
+    }
+
+    body.dark-mode th,
+    body.dark-mode td {
+      color: #F9FAFB;
+      border-bottom-color: #374151;
+    }
+
+    body.dark-mode .search-bar {
+      background: #1F2937;
+      border-color: #374151;
+    }
+
+    body.dark-mode .search-bar input {
+      background: transparent;
+      color: #F9FAFB;
+    }
+
+    body.dark-mode .action-btn {
+      background: #1F2937;
+      border-color: #374151;
+      color: var(--brand-primary);
+    }
+
+    body.dark-mode .action-btn:hover {
+      background: var(--brand-primary);
+      color: white;
+    }
+
+    body.dark-mode .status-completed { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    body.dark-mode .status-pending { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    body.dark-mode .status-processing { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+
+    body.dark-mode .activity-icon {
+      background: rgba(236, 72, 153, 0.15);
+    }
+
+    body.dark-mode .form-group input,
+    body.dark-mode .form-group select {
+      background: #1F2937;
+      border-color: #374151;
+      color: #F9FAFB;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background-color: #ffffff;
+      color: var(--text-main);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      transform: translateX(0);
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+      border-right: 1px solid var(--border-color);
+    }
+
+    body.dark-mode .sidebar {
+      background: #111827;
+      color: #F9FAFB;
+      border-right: 1px solid #374151;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 1001;
+      }
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+    .sidebar-overlay.active {
+      display: block;
+    }
+    body.sidebar-open {
+      overflow: hidden;
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+    }
+
+    body.dark-mode .sidebar-header {
+      border-bottom-color: #374151;
+    }
+
+    .nav-menu {
+      padding: 1.5rem 0;
+    }
+
+    .nav-item {
+      list-style: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.75rem 1.5rem;
+      color: #64748b;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0 12px 12px 0;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    body.rtl-active .nav-link {
+      border-radius: 12px 0 0 12px;
+    }
+
+    .nav-link:hover {
+      background: rgba(236, 72, 153, 0.08);
+      color: var(--brand-primary);
+    }
+
+    /* Active Navigation Link Styles */
+    .nav-link.active,
+    .nav-link.nav-link-active,
+    .nav-link-active {
+      background-color: #EC4899 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35) !important;
+    }
+    .nav-link.active i,
+    .nav-link.active span,
+    .nav-link.nav-link-active i,
+    .nav-link.nav-link-active span {
+      color: #ffffff !important;
+    }
+    .nav-link.active:hover {
+      background-color: #DB2777 !important;
+      color: #ffffff !important;
+    }
+
+    body.dark-mode .nav-link {
+      color: #9CA3AF;
+    }
+    body.dark-mode .nav-link:hover {
+      background: rgba(236, 72, 153, 0.2);
+      color: #F472B6;
+    }
+    body.dark-mode .nav-link.active {
+      background-color: #EC4899 !important;
+      color: #ffffff !important;
+    }
+
+    .nav-link i {
+      width: 24px;
+      font-size: 1.1rem;
+    }
+
+    .sidebar-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.75rem 1.5rem;
+      margin: 1rem 0 1.5rem 0;
+      color: #64748b;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: pointer;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    body.dark-mode .sidebar-action-btn {
+      border-top-color: #374151;
+      color: #9CA3AF;
+    }
+
+    .sidebar-action-btn:hover {
+      background: rgba(236, 72, 153, 0.08);
+      color: var(--brand-primary);
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 1.5rem 2rem;
+      transition: margin-left 0.3s ease;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+        padding-top: 70px;
+      }
+    }
+
+    /* RTL Support */
+    body.rtl-active {
+      direction: rtl;
+    }
+
+    body.rtl-active .sidebar {
+      left: auto;
+      right: 0;
+      border-right: none;
+      border-left: 1px solid var(--border-color);
+    }
+
+    body.rtl-active .main-content {
+      margin-left: 0;
+      margin-right: 280px;
+    }
+
+    @media (max-width: 768px) {
+      body.rtl-active .main-content {
+        margin-right: 0;
+      }
+      body.rtl-active .sidebar {
+        transform: translateX(100%);
+      }
+      body.rtl-active .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1100;
+      background: var(--brand-primary);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+      background: var(--brand-hover);
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .page-container {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .page-container.active-page {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    .page-title p {
+      color: #9CA3AF;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 0.6rem 1.2rem;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+      width: 200px;
+      background: transparent;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .toggle-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: white;
+      color: #64748b;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .text-btn {
+      font-size: 12px;
+      font-weight: 600;
+      width: auto;
+      border-radius: 40px;
+      padding: 0 16px;
+      letter-spacing: 1px;
+    }
+
+    .icon-btn:hover {
+      background: var(--brand-primary);
+      color: #fff;
+      border-color: var(--brand-primary);
+    }
+
+    body.dark-mode .icon-btn {
+      background: #1F2937;
+      border-color: #374151;
+      color: #9CA3AF;
+    }
+
+    body.dark-mode .icon-btn:hover {
+      background: var(--brand-primary);
+      color: #fff;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      padding-left: 0.5rem;
+      border-left: 1px solid var(--border-color);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--brand-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(236, 72, 153, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .stat-icon i {
+      font-size: 1.4rem;
+      color: var(--brand-primary);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-label {
+      color: #9CA3AF;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .charts-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .charts-section { grid-template-columns: 1fr; }
+    }
+
+    .chart-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.8rem;
+    }
+
+    .card-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .data-table {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      font-weight: 600;
+      color: #9CA3AF;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-weight: 500;
+      color: var(--brand-primary);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .action-btn:hover {
+      background: var(--brand-primary);
+      color: white;
+      border-color: var(--brand-primary);
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(236, 72, 153, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--brand-primary);
+    }
+
+    .activity-content p {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .activity-time {
+      font-size: 0.75rem;
+      color: #9CA3AF;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    .settings-form {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      max-width: 800px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9CA3AF;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: inherit;
+      background: var(--bg-main);
+      color: inherit;
+    }
+
+    .save-btn {
+      background: var(--brand-primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dashboard-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <!-- EXACT 100% IDENTICAL LOGO WITH CROSSHAIR ICON AND ACCENT PINK 'X' -->
+        <a href="index.html" class="text-3xl font-medium brand-logo tracking-wide block"
+            style="color: var(--text-main) !important; text-decoration: none;">
+            <i class="fas fa-crosshairs"
+                style="color: var(--accent-color); margin-right: 0.3em; font-size: 0.9em; vertical-align: middle;"></i>LASER<span style="color: var(--accent-color);">X</span>
+        </a>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item" data-page="dashboard"><a href="javascript:void(0)" onclick="showPage('dashboard')" class="nav-link active"><i class="fas fa-gauge-high"></i><span>Overview</span></a></li>
+        <li class="nav-item" data-page="orders"><a href="javascript:void(0)" onclick="showPage('orders')" class="nav-link"><i class="fas fa-calendar-check"></i><span>Bookings</span></a></li>
+        <li class="nav-item" data-page="products"><a href="javascript:void(0)" onclick="showPage('products')" class="nav-link"><i class="fas fa-crosshairs"></i><span>Phaser Racks</span></a></li>
+        <li class="nav-item" data-page="customers"><a href="javascript:void(0)" onclick="showPage('customers')" class="nav-link"><i class="fas fa-users"></i><span>Operatives</span></a></li>
+        <li class="nav-item" data-page="analytics"><a href="javascript:void(0)" onclick="showPage('analytics')" class="nav-link"><i class="fas fa-chart-line"></i><span>Telemetry</span></a></li>
+        <li class="nav-item" data-page="settings"><a href="javascript:void(0)" onclick="showPage('settings')" class="nav-link"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+      </ul>
+      <div style="padding: 0.75rem 1.5rem 0.25rem; font-size: 0.72rem; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px;">Switch Portal</div>
+      <a href="user.html" class="sidebar-action-btn" style="margin: 0.25rem 0; border-top: none;">
+        <i class="fas fa-user-shield"></i>
+        <span>Player Dashboard</span>
+      </a>
+      <a href="index.html" class="sidebar-action-btn" style="margin: 0.25rem 0 1rem 0;">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Main Site</span>
+      </a>
+    </aside>
+
+    <main class="main-content">
+      <div id="dashboard-page" class="page-container active-page"></div>
+      <div id="orders-page" class="page-container"></div>
+      <div id="products-page" class="page-container"></div>
+      <div id="customers-page" class="page-container"></div>
+      <div id="analytics-page" class="page-container"></div>
+      <div id="settings-page" class="page-container"></div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const bookingsData = [
+      { id: '#LX-8492', group: 'CyberNinjas Clan', mode: 'Team Deathmatch', time: '11:00 AM - 12:00 PM', players: '12 / 12', status: 'Processing' },
+      { id: '#LX-8493', group: 'Neon Strikers', mode: 'Capture The Base', time: '12:30 PM - 01:30 PM', players: '10 / 16', status: 'Pending' },
+      { id: '#LX-8494', group: 'Apex Legends Party', mode: 'Solo Survival', time: '02:00 PM - 03:00 PM', players: '8 / 10', status: 'Completed' }
+    ];
+
+    const phaserData = [
+      { id: 'Phaser #01', type: 'Alpha Laser X1', battery: '98%', status: 'Charging' },
+      { id: 'Phaser #02', type: 'Viper Elite MK-IV', battery: '100%', status: 'Active in Arena' },
+      { id: 'Phaser #03', type: 'Omega Heavy Blaster', battery: '85%', status: 'Active in Arena' },
+      { id: 'Phaser #04', type: 'Alpha Laser X1', battery: '42%', status: 'Maintenance' }
+    ];
+
+    function toggleDarkMode() { 
+      document.body.classList.toggle('dark-mode'); 
+      localStorage.setItem('laserx_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      const darkBtn = document.getElementById('darkModeIconBtn');
+      if(darkBtn) darkBtn.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="fas fa-sun text-amber-400"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    
+    function toggleRTL() { 
+      document.body.classList.toggle('rtl-active'); 
+      localStorage.setItem('laserx_rtl', document.body.classList.contains('rtl-active') ? 'enabled' : 'disabled');
+      const rtlBtn = document.getElementById('rtlIconBtn');
+      if(rtlBtn) rtlBtn.innerHTML = document.body.classList.contains('rtl-active') ? 'LTR' : 'RTL';
+    }
+
+    window.showPage = function(pageId) {
+      const pages = ['dashboard', 'orders', 'products', 'customers', 'analytics', 'settings'];
+      pages.forEach(p => document.getElementById(`${p}-page`)?.classList.remove('active-page'));
+      document.getElementById(`${pageId}-page`)?.classList.add('active-page');
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.querySelector(`[data-page="${pageId}"] .nav-link`)?.classList.add('active');
+      if(window.innerWidth <= 768) {
+        document.getElementById('sidebar')?.classList.remove('mobile-open');
+        document.getElementById('sidebarOverlay')?.classList.remove('active');
+      }
+    };
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => showPage(item.getAttribute('data-page')));
+    });
+
+    function renderDashboard() {
+      document.getElementById('dashboard-page').innerHTML = `
+        <div class="top-header">
+          <div class="page-title"><h1>Admin Control Center</h1><p>Live arena diagnostics and session management.</p></div>
+          <div class="header-actions">
+            <div class="search-bar"><i class="fas fa-search" style="color:#9CA3AF"></i><input type="text" placeholder="Search sessions..."></div>
+            <div class="toggle-buttons">
+              <button class="icon-btn" id="darkModeIconBtn"><i class="fas fa-moon"></i></button>
+              <button class="icon-btn text-btn" id="rtlIconBtn">RTL</button>
+            </div>
+            <div class="user-profile"><div class="user-avatar">AD</div><span style="font-weight:600;">Command HQ</span></div>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar-check"></i></div><div class="stat-value">48 / 60</div><div class="stat-label">Today's Bookings</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-crosshairs"></i></div><div class="stat-value">24 / 32</div><div class="stat-label">Active Phasers</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-dollar-sign"></i></div><div class="stat-value">$2,840</div><div class="stat-label">Daily Revenue</div></div>
+          <div class="stat-card"><div class="stat-icon"><i class="fas fa-server"></i></div><div class="stat-value">12 ms</div><div class="stat-label">Server Latency</div></div>
+        </div>
+        <div class="quick-actions">
+          <button class="action-btn" onclick="showPage('orders')"><i class="fas fa-plus"></i> New Booking</button>
+          <button class="action-btn" onclick="showPage('products')"><i class="fas fa-bolt"></i> Phaser Diagnostics</button>
+          <button class="action-btn"><i class="fas fa-triangle-exclamation"></i> Emergency Reset</button>
+        </div>
+        <div class="data-table">
+          <div class="card-header"><h3>Live Session Queue</h3></div>
+          <table>
+            <thead><tr><th>Booking ID</th><th>Group Name</th><th>Game Mode</th><th>Time Slot</th><th>Status</th></tr></thead>
+            <tbody>${bookingsData.map(b => `<tr><td><strong>${b.id}</strong></td><td>${b.group}</td><td>${b.mode}</td><td>${b.time}</td><td><span class="status-badge status-${b.status.toLowerCase()}">${b.status}</span></td></tr>`).join('')}</tbody>
+          </table>
+        </div>
+      `;
+      document.getElementById('darkModeIconBtn')?.addEventListener('click', toggleDarkMode);
+      document.getElementById('rtlIconBtn')?.addEventListener('click', toggleRTL);
+    }
+
+    function renderOrders() {
+      document.getElementById('orders-page').innerHTML = `<div class="top-header"><div class="page-title"><h1>Arena Bookings</h1><p>Active and scheduled sessions queue.</p></div></div><div class="data-table"><table><thead><tr><th>ID</th><th>Group</th><th>Mode</th><th>Time</th><th>Players</th><th>Status</th></tr></thead><tbody>${bookingsData.map(b => `<tr><td>${b.id}</td><td>${b.group}</td><td>${b.mode}</td><td>${b.time}</td><td>${b.players}</td><td><span class="status-badge status-${b.status.toLowerCase()}">${b.status}</span></td></tr>`).join('')}</tbody></table></div>`;
+    }
+
+    function renderProducts() {
+      document.getElementById('products-page').innerHTML = `<div class="top-header"><div class="page-title"><h1>Phaser Racks</h1><p>Hardware battery status and diagnostics.</p></div></div><div class="data-table"><table><thead><tr><th>Phaser ID</th><th>Model Type</th><th>Battery Level</th><th>Status</th></tr></thead><tbody>${phaserData.map(p => `<tr><td>${p.id}</td><td>${p.type}</td><td>${p.battery}</td><td>${p.status}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+
+    function renderCustomers() {
+      document.getElementById('customers-page').innerHTML = `<div class="top-header"><div class="page-title"><h1>Operative CRM</h1><p>Top registered players and season pass holders.</p></div></div><div class="data-table"><table><thead><tr><th>Name</th><th>ID</th><th>Matches</th><th>Win Rate</th><th>Rank</th></tr></thead><tbody><tr><td>Alex Vance</td><td>#LX-84920</td><td>142</td><td>78%</td><td>Elite Marksman</td></tr><tr><td>Marcus Miller</td><td>#LX-84921</td><td>98</td><td>65%</td><td>Veteran</td></tr></tbody></table></div>`;
+    }
+
+    function renderAnalytics() {
+      document.getElementById('analytics-page').innerHTML = `<div class="top-header"><div class="page-title"><h1>Arena Telemetry</h1><p>Real-time mesh network performance.</p></div></div><div class="stats-grid"><div class="stat-card"><div class="stat-value">99.9%</div><div class="stat-label">Uptime</div></div><div class="stat-card"><div class="stat-value">12 ms</div><div class="stat-label">Mesh Sync</div></div></div>`;
+    }
+
+    function renderSettings() {
+      document.getElementById('settings-page').innerHTML = `<div class="top-header"><div class="page-title"><h1>System Configuration</h1><p>Arena audio presets and lighting controls.</p></div></div><div class="settings-form"><div class="form-group"><label>Arena Name</label><input type="text" value="LaserX Arena - Entertainment District"></div><div class="form-group"><label>Combat Audio Preset</label><select><option>Sci-Fi Dubstep v4</option><option>Cyberpunk Synthwave</option></select></div><button class="save-btn" onclick="alert('Settings saved successfully!')">Save Configuration</button></div>`;
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    menuToggle?.addEventListener('click', () => { sidebar.classList.toggle('mobile-open'); overlay.classList.toggle('active'); });
+    overlay?.addEventListener('click', () => { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); });
+
+    if(localStorage.getItem('laserx_theme') === 'dark') document.body.classList.add('dark-mode');
+    if(localStorage.getItem('laserx_rtl') === 'enabled') document.body.classList.add('rtl-active');
+
+    renderDashboard();
+    renderOrders();
+    renderProducts();
+    renderCustomers();
+    renderAnalytics();
+    renderSettings();
+  </script>
+</body>
+</html>
