@@ -54,7 +54,6 @@
       overflow-x: hidden;
       font-weight: 300;
       opacity: 0;
-      opacity: 0;
       transition: opacity 0.3s ease-in-out !important;
     }
 
@@ -527,9 +526,17 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="services.html" class="nav-link">Services</a>
         <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="blog.html" class="nav-link active"> Blog</a>
-        <a href="reports.html" class="nav-link">Stats</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
         <a href="contact.html" class="nav-link">Contact</a>
+         <div class="dropdown">
+                    <div class="nav-link">Dashboards <i class="fas fa-chevron-down text-[10px] ml-1"></i></div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="#admin-dashboard-section" class="dropdown-item"><i class="fas fa-gauge-high mr-2 text-[var(--accent-color)]"></i> Admin Dashboard</a>
+                            <a href="#user-dashboard-section" class="dropdown-item"><i class="fas fa-user-shield mr-2 text-[var(--accent-color)]"></i> Player Dashboard</a>
+                        </div>
+                    </div>
+                </div>
       </div>
 
       <div class="hidden xl:flex items-center gap-5">
@@ -573,9 +580,11 @@
       <a href="about.html" class="mobile-link">About</a>
       <a href="services.html" class="mobile-link">Services</a>
       <a href="pricing.html" class="mobile-link">Pricing</a>
-      <a href="blog.html" class="mobile-link active" style="color: var(--accent-color); border-left: 4px solid var(--accent-color);"> Blog</a>
-      <a href="reports.html" class="mobile-link">Stats</a>
+      <a href="blog.html" class="mobile-link active" style="color: var(--accent-color); border-left: 4px solid var(--accent-color);">Blog</a>
       <a href="contact.html" class="mobile-link">Contact</a>
+       <a href="#admin-dashboard-section" onclick="toggleMenu()" class="mobile-link">Admin Dashboard</a>
+            <a href="#user-dashboard-section" onclick="toggleMenu()" class="mobile-link">Player Dashboard</a>
+       
     </div>
 
     <div
@@ -601,34 +610,44 @@
     </div>
   </div>
 
-  <!-- HERO BANNER -->
+  <!-- EXACT HOME 2 TOURNAMENT HERO BANNER MATCH -->
   <main class="flex-grow">
     <section
-      class="relative w-full min-h-[60vh] flex items-center bg-fixed bg-cover bg-center bg-no-repeat border-b border-[var(--border-color)] py-20 sm:py-24 lg:py-28"
-      style="background-image: url('image/indoor game (25).jpg');">
-      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40 z-10"></div>
-      <div class="relative z-20 max-w-4xl mx-auto text-center px-4 sm:px-6">
-        <span
-          class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--accent-color)]/20 text-[var(--accent-color)] border border-[var(--accent-color)]/30 font-bold text-sm mb-6 backdrop-blur-sm">
-          <i class="fas fa-trophy"></i> Global Leaderboard & Tactical Dispatches
-        </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6 uppercase tracking-tight drop-shadow-2xl">
-          LaserX Arena Blog & Rankings
-        </h1>
-        <p class="text-lg md:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-xl font-light">
-          Top squad standings, pro tactical guides, tournament schedules, and live telemetry briefs from the cyber entertainment district.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-          <a href="#featured-tactics"
-            class="w-full sm:w-auto btn btn-solid text-center shadow-lg hover:shadow-xl">
-            <i class="fas fa-fire mr-2"></i> Featured Tactics
-          </a>
-          <a href="#clan-rankings"
-            class="w-full sm:w-auto btn btn-outline !border-2 !border-white !text-white hover:!bg-white hover:!text-black text-center shadow-lg hover:shadow-xl bg-black/20 backdrop-blur-sm">
-            <i class="fas fa-shield-halved mr-2"></i> Top Clan Rankings
-          </a>
+        class="relative w-full h-[100dvh] pt-20 flex items-center justify-center overflow-hidden border-b border-[var(--border-color)]">
+        <div class="absolute inset-0 z-0 bg-black">
+            <img src="image/indoor game (4).jpg" alt="LaserX Arena Tournament Championship"
+                class="w-full h-full object-cover animate-zoom opacity-50" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
         </div>
-      </div>
+
+        <div class="max-w-[1440px] mx-auto px-6 xl:px-12 w-full flex flex-col items-start justify-center relative z-10">
+            <div class="max-w-3xl">
+                <span
+                    class="text-[var(--accent-color)] text-sm font-medium uppercase tracking-[0.2em] mb-4 inline-block bg-black/60 backdrop-blur-sm px-4 py-2 border-l-4 border-[var(--accent-color)] shadow-md">
+                    <i class="fas fa-trophy mr-2"></i> Global Leaderboard & Tactical Dispatches
+                </span>
+
+                <h1
+                    class="text-4xl md:text-6xl xl:text-7xl font-medium leading-[1.1] mb-6 text-white uppercase tracking-tight drop-shadow-2xl">
+                    LaserX Arena <span class="text-[var(--accent-color)]">Blog</span>   <br class="hidden sm:block">
+                   & Rankings.
+                </h1>
+
+                <p class="text-slate-200 text-lg md:text-xl leading-relaxed max-w-2xl font-normal mb-10 drop-shadow-xl">
+          Top squad standings, pro tactical guides, tournament schedules, and live telemetry briefs from the cyber entertainment district.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#clan-rankings" class="btn btn-solid text-center shadow-lg hover:shadow-xl">
+                        <i class="fas fa-shield-halved mr-2"></i> Featured Tactics
+                    </a>
+                    <a href="contact.html"
+                        class="btn btn-outline !border-2 !border-white !text-white hover:!bg-white hover:!text-black text-center shadow-lg hover:shadow-xl bg-black/20 backdrop-blur-sm">
+                        <i class="far fa-calendar-alt mr-2"></i> Top Clan Rankings
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- ========================================== -->
@@ -641,14 +660,13 @@
             <span class="text-[var(--accent-color)] text-xs font-semibold uppercase tracking-widest block mb-2">Editorial Picks</span>
             <h2 class="text-3xl md:text-4xl font-medium tracking-wide uppercase">Featured Combat Guides</h2>
           </div>
-          <p class="text-[var(--text-muted)] text-sm max-w-md mt-4 md:mt-0 font-light">Master the multi-level maze with advice straight from reigning tournament champions.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div class="dash-card flex flex-col justify-between">
             <div>
               <div class="h-48 overflow-hidden rounded mb-6 relative">
-                <img src="image/indoor game (15).jpg" alt="Tactics" class="w-full h-full object-cover">
+                <img src="image/new game (4).jpg" alt="Tactics" class="w-full h-full object-cover">
                 <span class="absolute top-3 left-3 px-3 py-1 bg-[var(--accent-color)] text-white text-xs uppercase font-medium rounded">Strategy</span>
               </div>
               <h3 class="text-xl font-medium mb-3 uppercase">Flank Tactics for Multi-Level Mazes</h3>
@@ -663,7 +681,7 @@
           <div class="dash-card flex flex-col justify-between">
             <div>
               <div class="h-48 overflow-hidden rounded mb-6 relative">
-                <img src="image/indoor game (21).jpg" alt="Phaser Calibration" class="w-full h-full object-cover">
+                <img src="image/new game (7).jpg" alt="Phaser Calibration" class="w-full h-full object-cover">
                 <span class="absolute top-3 left-3 px-3 py-1 bg-[var(--accent-color)] text-white text-xs uppercase font-medium rounded">Hardware</span>
               </div>
               <h3 class="text-xl font-medium mb-3 uppercase">Optimizing Your Infrared Phaser Settings</h3>
@@ -678,7 +696,7 @@
           <div class="dash-card flex flex-col justify-between">
             <div>
               <div class="h-48 overflow-hidden rounded mb-6 relative">
-                <img src="image/indoor game (30).jpg" alt="Squad Synergy" class="w-full h-full object-cover">
+                <img src="image/new game (1).jpg" alt="Squad Synergy" class="w-full h-full object-cover">
                 <span class="absolute top-3 left-3 px-3 py-1 bg-[var(--accent-color)] text-white text-xs uppercase font-medium rounded">Teamwork</span>
               </div>
               <h3 class="text-xl font-medium mb-3 uppercase">5v5 Squad Synergy & Role Assignments</h3>
@@ -778,7 +796,7 @@
           </div>
           <div class="w-full lg:w-1/2">
             <div class="dash-card p-2 bg-black/40 overflow-hidden">
-              <img src="image/indoor game (3).jpg" alt="Tournament Action" class="w-full h-[360px] object-cover rounded">
+              <img src="image/champion (2).jpg" alt="Tournament Action" class="w-full h-[360px] object-cover rounded">
             </div>
           </div>
         </div>
