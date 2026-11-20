@@ -752,65 +752,219 @@
         </div>
     </section>
 
-    <!-- SECTION 3: MVP HALL OF FAME -->
-    <section class="py-24 bg-[var(--bg-color)] border-b border-[var(--border-color)]">
-        <div class="max-w-[1440px] mx-auto px-6 xl:px-12">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-[var(--accent-color)] text-xs font-semibold uppercase tracking-widest block mb-2">Legendary Operatives</span>
-                <h2 class="text-3xl md:text-4xl font-medium tracking-wide uppercase">Hall of Fame</h2>
+   <!-- SECTION 4: TACTICAL ARSENAL & LOADOUTS -->
+<section class="py-24 bg-[var(--bg-color)] border-b border-[var(--border-color)]">
+    <div class="max-w-[1440px] mx-auto px-6 xl:px-12">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+                <span class="text-[var(--accent-color)] text-xs font-semibold uppercase tracking-widest block mb-2">Next-Gen Hardware</span>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-wide uppercase">Tactical Arsenal</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="dash-card text-center">
-                    <div class="w-20 h-20 rounded-full border-2 border-[var(--accent-color)] p-1 mx-auto mb-4 overflow-hidden">
-                        <img src="image/new game (7).jpg" alt="MVP Operator" class="w-full h-full object-cover rounded-full">
-                    </div>
-                    <h3 class="text-xl font-medium uppercase mb-1">Alex "Viper" Vance</h3>
-                    <p class="text-[var(--accent-color)] text-xs uppercase tracking-wider mb-3">CyberNinjas • 96.4% Accuracy</p>
-                    <p class="text-[var(--text-muted)] text-xs font-light">Holder of the record for most solo survival victories and longest undefeated kill-streak.</p>
-                </div>
-                <div class="dash-card text-center">
-                    <div class="w-20 h-20 rounded-full border-2 border-[var(--accent-color)] p-1 mx-auto mb-4 overflow-hidden">
-                        <img src="image/laser-tag (1).jpg" alt="MVP Operator" class="w-full h-full object-cover rounded-full">
-                    </div>
-                    <h3 class="text-xl font-medium uppercase mb-1">Marcus "Raze" Miller</h3>
-                    <p class="text-[var(--accent-color)] text-xs uppercase tracking-wider mb-3">Neon Strikers • 142 MVPs</p>
-                    <p class="text-[var(--text-muted)] text-xs font-light">Renowned tactical strategist known for swift objective captures and clutch team defenses.</p>
-                </div>
-                <div class="dash-card text-center">
-                    <div class="w-20 h-20 rounded-full border-2 border-[var(--accent-color)] p-1 mx-auto mb-4 overflow-hidden">
-                        <img src="image/laser-tag (1).jpg" alt="MVP Operator" class="w-full h-full object-cover rounded-full">
-                    </div>
-                    <h3 class="text-xl font-medium uppercase mb-1">Elena "Ghost" Thorne</h3>
-                    <p class="text-[var(--accent-color)] text-xs uppercase tracking-wider mb-3">Apex Syndicate • 94.1% Accuracy</p>
-                    <p class="text-[var(--text-muted)] text-xs font-light">Master marksman specialized in long-range infrared targeting and frontline suppression.</p>
-                </div>
-            </div>
+            <p class="text-[var(--text-muted)] text-xs md:text-sm font-light max-w-md">
+                Engineered with zero-latency infrared optics, haptic feedback vests, and real-time biometric telemetry for competitive arena combat.
+            </p>
         </div>
-    </section>
 
-    <!-- SECTION 4: TOURNAMENT RULES & CODE OF CONDUCT -->
-    <section class="py-24 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
-        <div class="max-w-[1000px] mx-auto px-6 xl:px-12">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-[var(--accent-color)] text-xs font-semibold uppercase tracking-widest block mb-2">Fair Play</span>
-                <h2 class="text-3xl md:text-4xl font-medium tracking-wide uppercase">Tournament Regulations</h2>
+        <!-- 2-Column Asymmetric Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Left Feature Card (7 Columns) -->
+            <div class="lg:col-span-7 dash-card flex flex-col justify-between relative overflow-hidden group">
+                <div class="flex items-center justify-between border-b border-[var(--border-color)] pb-4 mb-6">
+                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-color)]">// CLASS_01: PRIMARY MARKSMAN</span>
+                    <span class="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider border border-[var(--accent-color)] text-[var(--accent-color)]">
+                        Pro Certified
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center my-auto">
+                    <div class="aspect-square rounded-lg overflow-hidden border border-[var(--border-color)] bg-black/40">
+                        <img src="image/indoor game (19).jpg" alt="Valkyrie-X9 Pulse Rifle" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-medium uppercase mb-2">Valkyrie-X9 Pulse</h3>
+                        <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed mb-6">
+                            Dual-beam collimated IR emitter with recoil simulation and integrated OLED ammo counter. Calibrated for pinpoint long-range elimination.
+                        </p>
+
+                        <!-- Telemetry Stat Bars -->
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-[11px] uppercase tracking-wider mb-1">
+                                    <span>Effective Range</span>
+                                    <span class="text-[var(--accent-color)]">150m</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="bg-[var(--accent-color)] h-full w-[92%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] uppercase tracking-wider mb-1">
+                                    <span>Fire Rate</span>
+                                    <span class="text-[var(--accent-color)]">600 RPM</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="bg-[var(--accent-color)] h-full w-[78%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] uppercase tracking-wider mb-1">
+                                    <span>Optic Precision</span>
+                                    <span class="text-[var(--accent-color)]">99.2%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="bg-[var(--accent-color)] h-full w-[96%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="space-y-4">
-                <div class="dash-card p-6">
-                    <h3 class="font-medium text-sm uppercase mb-2 flex items-center justify-between"><span class="text-[var(--accent-color)] mr-2">01.</span> Equipment Calibration & Inspection</h3>
-                    <p class="text-[var(--text-muted)] text-xs leading-relaxed pl-5">All tournament phasers are calibrated and locked by arena referees prior to match initialization to guarantee absolute parity.</p>
+
+            <!-- Right Stacked Spec Cards (5 Columns) -->
+            <div class="lg:col-span-5 flex flex-col gap-8">
+                <!-- Sub-card 1 -->
+                <div class="dash-card flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-[var(--accent-color)] text-[11px] font-mono uppercase tracking-widest block mb-1">// CHASSIS_ARMOR</span>
+                            <h3 class="text-xl font-medium uppercase">Aegis Haptic Rig</h3>
+                        </div>
+                        <span class="text-xs font-mono text-[var(--text-muted)]">12-ZONE</span>
+                    </div>
+                    <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed mb-4">
+                        Lightweight breathable tactical vest equipped with 360° IR hit sensors and directional vibration motors so you feel every incoming tag.
+                    </p>
+                    <div class="flex items-center gap-4 pt-4 border-t border-[var(--border-color)] text-[11px] uppercase tracking-wider text-[var(--accent-color)]">
+                        <span>• 1.4kg Ultralight</span>
+                        <span>• Live Shield Regen</span>
+                    </div>
                 </div>
-                <div class="dash-card p-6">
-                    <h3 class="font-medium text-sm uppercase mb-2 flex items-center justify-between"><span class="text-[var(--accent-color)] mr-2">02.</span> Sportsmanship & Conduct</h3>
-                    <p class="text-[var(--text-muted)] text-xs leading-relaxed pl-5">Zero tolerance for unsportsmanlike conduct, physical contact inside the maze, or intentional sensor obstruction.</p>
+
+                <!-- Sub-card 2 -->
+                <div class="dash-card flex-1 flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-[var(--accent-color)] text-[11px] font-mono uppercase tracking-widest block mb-1">// FIELD_UTILITY</span>
+                            <h3 class="text-xl font-medium uppercase">EMP Proximity Node</h3>
+                        </div>
+                        <span class="text-xs font-mono text-[var(--text-muted)]">360° PULSE</span>
+                    </div>
+                    <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed mb-4">
+                        Deployable arena beacon capable of temporarily scrambling enemy HUDs, locking down capture zones, or reviving downed squadmates.
+                    </p>
+                    <div class="flex items-center gap-4 pt-4 border-t border-[var(--border-color)] text-[11px] uppercase tracking-wider text-[var(--accent-color)]">
+                        <span>• 8m Blast Radius</span>
+                        <span>• 30s Cooldown</span>
+                    </div>
                 </div>
-                <div class="dash-card p-6">
-                    <h3 class="font-medium text-sm uppercase mb-2 flex items-center justify-between"><span class="text-[var(--accent-color)] mr-2">03.</span> Squad Substitution Policy</h3>
-                    <p class="text-[var(--text-muted)] text-xs leading-relaxed pl-5">Registered clans are permitted up to 2 substitute operatives per tournament bracket, provided profiles are pre-verified.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+    <!-- SECTION 4: ARENA PROTOCOLS & COMBAT DIRECTIVES -->
+<section class="py-24 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
+    <div class="max-w-[1440px] mx-auto px-6 xl:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Left Sticky Briefing Panel (4 Columns) -->
+            <div class="lg:col-span-4 lg:sticky lg:top-24">
+                <span class="text-[var(--accent-color)] text-xs font-semibold uppercase tracking-widest block mb-2">Arena Directives</span>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-wide uppercase mb-4">Rules of Engagement</h2>
+                <p class="text-[var(--text-muted)] text-xs md:text-sm font-light leading-relaxed mb-8">
+                    Every sanctioned match is monitored by automated arena telemetry and live marshals to ensure zero-compromise competitive integrity.
+                </p>
+
+                <!-- Quick Compliance Status Box -->
+                <div class="dash-card p-6 border-l-2 border-l-[var(--accent-color)]">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[11px] font-mono uppercase tracking-widest text-[var(--accent-color)]">// TELEMETRY_ACTIVE</span>
+                        <span class="w-2 h-2 rounded-full bg-[var(--accent-color)] animate-pulse"></span>
+                    </div>
+                    <p class="text-xs font-medium uppercase mb-1">Instant Penalty Enforcement</p>
+                    <p class="text-[var(--text-muted)] text-[11px] font-light leading-relaxed">
+                        Sensor tampering or physical contact triggers an automatic 30-second vest deactivation by arena control.
+                    </p>
                 </div>
+            </div>
+
+            <!-- Right 2x2 Tactical Grid (8 Columns) -->
+            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Directive 01 -->
+                <div class="dash-card p-8 relative overflow-hidden group">
+                    <span class="absolute -right-2 -top-4 text-7xl font-bold text-white/[0.03] select-none pointer-events-none group-hover:text-[var(--accent-color)]/10 transition-colors">
+                        01
+                    </span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-[var(--accent-color)]/10 text-[var(--accent-color)] border border-[var(--accent-color)]/30">
+                            Pre-Match
+                        </span>
+                        <span class="text-[11px] font-mono text-[var(--text-muted)]">REQ // MANDATORY</span>
+                    </div>
+                    <h3 class="text-lg font-medium uppercase mb-2">Hardware Calibration</h3>
+                    <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed">
+                        All tournament phasers and chest rigs undergo optical sync and range locking by arena referees 15 minutes prior to match initialization.
+                    </p>
+                </div>
+
+                <!-- Directive 02 -->
+                <div class="dash-card p-8 relative overflow-hidden group">
+                    <span class="absolute -right-2 -top-4 text-7xl font-bold text-white/[0.03] select-none pointer-events-none group-hover:text-[var(--accent-color)]/10 transition-colors">
+                        02
+                    </span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-[var(--accent-color)]/10 text-[var(--accent-color)] border border-[var(--accent-color)]/30">
+                            In-Arena
+                        </span>
+                        <span class="text-[11px] font-mono text-[var(--text-muted)]">ZERO-CONTACT</span>
+                    </div>
+                    <h3 class="text-lg font-medium uppercase mb-2">No Sensor Obstruction</h3>
+                    <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed">
+                        Covering vest hit-zones with hands, phaser barrels, or arena barriers is strictly prohibited and logged automatically by proximity sensors.
+                    </p>
+                </div>
+
+                <!-- Directive 03 -->
+                <div class="dash-card p-8 relative overflow-hidden group">
+                    <span class="absolute -right-2 -top-4 text-7xl font-bold text-white/[0.03] select-none pointer-events-none group-hover:text-[var(--accent-color)]/10 transition-colors">
+                        03
+                    </span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-[var(--accent-color)]/10 text-[var(--accent-color)] border border-[var(--accent-color)]/30">
+                            Roster
+                        </span>
+                        <span class="text-[11px] font-mono text-[var(--text-muted)]">MAX 2 SUBS</span>
+                    </div>
+                    <h3 class="text-lg font-medium uppercase mb-2">Squad Substitutions</h3>
+                    <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed">
+                        Registered squads may field up to 2 pre-verified reserve operatives between bracket rounds, provided biometric IDs are locked before check-in.
+                    </p>
+                </div>
+
+                <!-- Directive 04 -->
+                <div class="dash-card p-8 relative overflow-hidden group">
+                    <span class="absolute -right-2 -top-4 text-7xl font-bold text-white/[0.03] select-none pointer-events-none group-hover:text-[var(--accent-color)]/10 transition-colors">
+                        04
+                    </span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-[var(--accent-color)]/10 text-[var(--accent-color)] border border-[var(--accent-color)]/30">
+                            Movement
+                        </span>
+                        <span class="text-[11px] font-mono text-[var(--text-muted)]">SAFETY-LOCK</span>
+                    </div>
+                    <h3 class="text-lg font-medium uppercase mb-2">Arena Traversal Code</h3>
+                    <p class="text-[var(--text-muted)] text-xs font-light leading-relaxed">
+                        No climbing multi-level barricades, sliding across neon ramps, or physical body-checking inside the dark-zone maze corridors.
+                    </p>
+                </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- SECTION 5: ESPORTS SPONSORS & PARTNERS -->
     <section class="py-24 bg-[var(--bg-color)] border-b border-[var(--border-color)]">
